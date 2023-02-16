@@ -1,7 +1,7 @@
 import "./App.css";
-import Header from "./components/Header";
-import Search from "./components/Search";
-import Cards from "./components/Cards";
+import Header from "./component/Header";
+import Search from "./component/Search";
+import Cards from "./component/Cards";
 
 function App() {
   return (

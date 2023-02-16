@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./DarkMode.css";
 import { Container, Navbar } from "react-bootstrap";
-import { Switch } from "react-switch";
 
 // this is our Header component
 const Header = () => {
@@ -27,7 +26,6 @@ const Header = () => {
     <Navbar expand="lg">
       <Container fluid>
         <Navbar.Brand href="#">Where in the world?🌏</Navbar.Brand>
-        <Switch onChange={changeModeHandler} checked={theme.checked} />
       </Container>
     </Navbar>
   );
