@@ -4,7 +4,6 @@ const Home = ({ theme }) => {
   return (
     <div className={theme}>
       <Search theme={theme} />
-      <Cards theme={theme} />
     </div>
   );
 };

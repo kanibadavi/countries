@@ -4,26 +4,15 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import Cards from "./Cards";
 
 const Search = ({ theme }) => {
-  ///////////////////////////useState/////////////////////////
-
-  /* useState returns an array with exactly two values:
-  1.The current state. During the first render, it will match the initialState you have passed.
-  2.The set function that lets you update the state to a different value and trigger a re-render.
-  */
-  //const [state, setState] = useState(initialState)
-  //"light" is our css
-  /*how we use useState : 
-  step1: ask yourself where you want to change.thats the place where you will use an event called eventHandler.
-  step2:write a useState.
-  step3:change your state by your setState in eventHandler.
-  step4:now that data has changed you need to show that data on your DOM page with useEffect
-  */
-
   const [search, setSearch] = useState([]);
   const [input, setInput] = useState("");
+  const [copy, setCopy] = useState([]);
+  const [select, setSelect] = useState("");
 
   ////////////////////useEffect////////////////////
 
+  //after DOM mounts on page useEffect will come for getting data.because we can not wait till data comes and then our page mounts we use useEffect.
+  //in useEffects we will use our setter to update
   //cleaning up or applying the effect after every render might create a performance problem.so we will use dependency array at the end of useEffect.
   //If the array contains a state variable, the useEffect callback function gets triggered on 2 occasions. First, when the page renders and whenever the state variable is updated.
   useEffect(() => {
@@ -31,20 +20,43 @@ const Search = ({ theme }) => {
       .then((res) => res.json())
       .then((data) => {
         setSearch(data);
-        // console.log(data);
+        setCopy(data);
       });
   }, []); //dependency array is here!
+  useEffect(() => {
+    const temp = search
+      .filter((country) => {
+        if (!select) {
+          return true;
+        } else {
+          return country.region.includes(select);
+        }
+      })
+      .filter((country) => {
+        return country.name.common
+          .toLowerCase()
+          .includes(input.toLowerCase().trim());
+      });
+    setCopy(temp);
+  }, [input, select]);
   const searchHandler = (e) => {
-    e.preventDefault();
     setInput(e.target.value);
   };
-
+  const optionList = [
+    { title: "Africa", id: 1 },
+    { title: "Americas", id: 2 },
+    { title: "Asia", id: 3 },
+    { title: "Europe", id: 4 },
+    { title: "Australia", id: 5 },
+    { title: "Oceania", id: 6 },
+  ];
   return (
     <>
       <Stack gap={3} direction="horizontal" className="container">
-        <Form className="container">
+        <Form className="container" onSubmit={(e) => e.preventDefault()}>
           <Row>
             <Col>
+              {/* In React, Controlled Components are those in which form’s data is handled by the component’s state. It takes its current value through props and makes changes through callbacks like onClick, onChange, etc. */}
               <Form.Control
                 type="text"
                 placeholder="Search Here..."
@@ -54,20 +66,27 @@ const Search = ({ theme }) => {
             </Col>
           </Row>
         </Form>
-        <Dropdown>
+        <select
+          value={select}
+          onChange={(e) => setSelect(e.target.value)}
+          className="select"
+        >
+          <option value="">filter by region</option>
+          {optionList?.map((continent) => {
+            return (
+              <option value={continent.title} key={continent.id}>
+                {continent.title}
+              </option>
+            );
+          })}
+        </select>
+        {/* <Dropdown>
           <Dropdown.Toggle id="dropdown-basic">
             Filter by region
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
             <div>
-              {/* {search?.map((item, index) => {
-                return (
-                  <DropdownItem key={index}>
-                    <div href="#">{item.region}</div>
-                  </DropdownItem>
-                );
-              })} */}
               <DropdownItem>
                 <div>Europe</div>
                 <div>Asia</div>
@@ -78,9 +97,9 @@ const Search = ({ theme }) => {
               </DropdownItem>
             </div>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
       </Stack>
-      <Cards theme={theme} data={search} />
+      <Cards theme={theme} data={copy} />
     </>
   );
 };

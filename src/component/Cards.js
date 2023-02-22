@@ -2,29 +2,32 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Cards = ({ data, theme }) => {
-  console.log(theme);
   return (
-    <Container className={theme}>
+    <Container className={theme} style={{ marginTop: "2rem" }}>
       <Row>
         {data?.map((item, index) => {
           return (
             <Col key={index} className={theme}>
               <Card style={{ width: "15rem" }}>
-                <Link to={`/country/${item.name.common}`}>
+                {/* A <Link> is an element that lets the user navigate to another page by clicking or tapping on it. In react-router-dom, a <Link> renders an accessible <a> element with a real href that points to the resource it's linking to.  */}
+                <Link
+                  to={`/country/${item.name.common.split(" ").join("-")}`}
+                  state={item}
+                >
                   <Card.Img
-                    variant="top"
                     src={item.flags.png}
                     alt={item.flags.alt}
+                    // we give inline style by using two curly braces
                     style={{ height: 150 }}
                   />
                 </Link>
                 <Card.Body className={theme}>
                   <Card.Title>{item.name.common}</Card.Title>
-                  <Card.Text>
-                    <div>Population:{item.population}</div>
-                    <div>Region:{item.region}</div>
-                    <div>Capital:{item.capital}</div>
-                  </Card.Text>
+                  <div>
+                    <p>Population:{item.population}</p>
+                    <p>Region:{item.region}</p>
+                    <p>Capital:{item.capital}</p>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
