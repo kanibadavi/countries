@@ -1,13 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 
-const Detail = () => {
+const Detail = ({ theme }) => {
   const { name } = useParams();
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState([]);
+  console.log(country, name);
 
   // const location = useLocation();
   // const country = location.state;
-  console.log();
+
   useEffect(() => {
     fetch(
       `https://restcountries.com/v3.1/name/${name
@@ -17,18 +23,48 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => {
         setCountry(data);
-      });
+      })
+      .catch((error) => console.log(error));
   }, []);
   return (
     <>
-      {country ? (
-        <img
-          src={country[0].flags.png}
-          alt={country[0].flags.alt}
-          // we give inline style by using two curly braces
-          style={{ height: 150 }}
-        />
-      ) : null}
+      <Container>
+        <Link to="/">
+          <Button>← back</Button>
+        </Link>
+        <Row>
+          <Col>
+            {country ? (
+              <img
+                src={country[0]?.flags.png}
+                alt={country[0]?.flags.alt}
+                // we give inline style by using two curly braces
+                style={{ height: 250 }}
+              />
+            ) : null}
+          </Col>
+          <Col className={theme}>
+            <h2>{country[0]?.name.common}</h2>
+            <br />
+            <div>
+              <Row>
+                <Col>
+                  <p>Native name:{country[0]?.name.official}</p>
+                  <p>Population:{country[0]?.population}</p>
+                  <p>Region:{country[0]?.region}</p>
+                  <p>Sub region:{country[0]?.subregion}</p>
+                  <p>Capital:{country[0]?.capital}</p>
+                </Col>
+                <Col>
+                  <p>Top level domain:{country[0]?.tld[0]}</p>
+                  {/* <p>Currency:{country[0]?.currencies.ISK.name}</p> */}
+                  <p>languages:{country[0]?.demonyms.eng.f}</p>
+                </Col>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

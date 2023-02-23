@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Stack, Dropdown, Form, Row, Col } from "react-bootstrap";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import { Stack, Form, Row, Col } from "react-bootstrap";
 import Cards from "./Cards";
+import Detail from "./Detail";
 
 const Search = ({ theme }) => {
   const [search, setSearch] = useState([]);
@@ -21,6 +21,7 @@ const Search = ({ theme }) => {
       .then((data) => {
         setSearch(data);
         setCopy(data);
+        console.log(data);
       });
   }, []); //dependency array is here!
   useEffect(() => {
@@ -38,7 +39,7 @@ const Search = ({ theme }) => {
           .includes(input.toLowerCase().trim());
       });
     setCopy(temp);
-  }, [input, select]);
+  }, [input, select, search]);
   const searchHandler = (e) => {
     setInput(e.target.value);
   };
