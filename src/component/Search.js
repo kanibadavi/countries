@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Stack, Form, Row, Col } from "react-bootstrap";
 import Cards from "./Cards";
-import Detail from "./Detail";
 
 const Search = ({ theme }) => {
   const [search, setSearch] = useState([]);
@@ -81,24 +80,6 @@ const Search = ({ theme }) => {
             );
           })}
         </select>
-        {/* <Dropdown>
-          <Dropdown.Toggle id="dropdown-basic">
-            Filter by region
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <div>
-              <DropdownItem>
-                <div>Europe</div>
-                <div>Asia</div>
-                <div>Americas</div>
-                <div>Africa</div>
-                <div>Australia</div>
-                <div>Oceania</div>
-              </DropdownItem>
-            </div>
-          </Dropdown.Menu>
-        </Dropdown> */}
       </Stack>
       <Cards theme={theme} data={copy} />
     </>

@@ -25,10 +25,10 @@ const Detail = ({ theme }) => {
         setCountry(data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [name]);
   return (
     <>
-      <Container>
+      <Container className={theme}>
         <Link to="/">
           <Button>← back</Button>
         </Link>
@@ -43,7 +43,7 @@ const Detail = ({ theme }) => {
               />
             ) : null}
           </Col>
-          <Col className={theme}>
+          <Col>
             <h2>{country[0]?.name.common}</h2>
             <br />
             <div>
@@ -57,8 +57,12 @@ const Detail = ({ theme }) => {
                 </Col>
                 <Col>
                   <p>Top level domain:{country[0]?.tld[0]}</p>
-                  {/* <p>Currency:{country[0]?.currencies.ISK.name}</p> */}
+                  <p>Currency:{country[0]?.currencies[0]}</p>
                   <p>languages:{country[0]?.demonyms.eng.f}</p>
+                  {/* {country[0].borders?.map((border) => {
+                    console.log(border);
+                    return <p>{border}</p>;
+                  })} */}
                 </Col>
               </Row>
             </div>

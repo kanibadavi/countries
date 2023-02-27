@@ -36,6 +36,8 @@ function App() {
         path is the path pattern to match against the URL to determine if this route matches a URL
         element is the element to render when the route matches the URL. */}
       <Routes>
+        {/*
+         The element to render when the route matches the URL. */}
         <Route path="/" element={<Home theme={theme} />} />
         <Route path="/country/:name" element={<Detail theme={theme} />} />
       </Routes>
