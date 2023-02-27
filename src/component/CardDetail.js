@@ -30,7 +30,7 @@ const Detail = ({ theme }) => {
     <>
       <Container className={theme}>
         <Link to="/">
-          <Button>← back</Button>
+          <Button style={{ marginBottom: "15px" }}>← back</Button>
         </Link>
         <Row>
           <Col>
@@ -57,7 +57,6 @@ const Detail = ({ theme }) => {
                 </Col>
                 <Col>
                   <p>Top level domain:{country[0]?.tld[0]}</p>
-                  <p>Currency:{country[0]?.currencies[0]}</p>
                   <p>languages:{country[0]?.demonyms.eng.f}</p>
                   {/* {country[0].borders?.map((border) => {
                     console.log(border);

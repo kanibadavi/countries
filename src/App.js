@@ -1,10 +1,9 @@
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import Header from "./component/Header";
 import Home from "./component/Home";
-import Detail from "./component/Detail";
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import CardDetail from "./component/CardDetail";
 import "./index.css";
-import "./component/DarkMode.css";
 
 function App() {
   ///////////////////////////useState/////////////////////////
@@ -39,7 +38,7 @@ function App() {
         {/*
          The element to render when the route matches the URL. */}
         <Route path="/" element={<Home theme={theme} />} />
-        <Route path="/country/:name" element={<Detail theme={theme} />} />
+        <Route path="/country/:name" element={<CardDetail theme={theme} />} />
       </Routes>
     </div>
   );

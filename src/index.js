@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./component/DarkMode.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 //npm install react-router
 //BrowserRouter is a router implementation to keep your UI in sync with the URL.
@@ -17,4 +15,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-reportWebVitals();
